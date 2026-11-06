@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diwali – The Festival of Lights</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Mukta:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --maroon:#4a0a12; --deep:#2a0509; --saffron:#ff9933; --marigold:#ffb400;
+  --gold:#f5c542; --crimson:#c1121f; --cream:#fff3d6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh; color:var(--cream); font-family:'Mukta',Georgia,serif; overflow-x:hidden;
+  background:
+    radial-gradient(ellipse at 50% 108%, rgba(255,140,40,.6), transparent 55%),
+    radial-gradient(ellipse at 12% 18%, rgba(140,30,130,.5), transparent 50%),
+    radial-gradient(ellipse at 88% 28%, rgba(210,40,50,.38), transparent 50%),
+    linear-gradient(180deg,#12051d,#3a0a24 58%,#5e1608);
+  background-attachment:fixed;
+}
+/* marigold torana border */
+.torana{height:34px;background:
+  radial-gradient(circle at 17px 0, var(--marigold) 12px, var(--saffron) 13px 16px, transparent 17px) 0 0/34px 34px repeat-x;}
+header{text-align:center;padding:70px 16px 10px}
+h1{font-family:'Cinzel Decorative',Georgia,serif;font-size:clamp(2.2rem,7vw,4.4rem);color:var(--gold);
+   text-shadow:0 0 18px rgba(255,153,51,.7),0 3px 0 #7a3b00;letter-spacing:.04em}
+header p{margin-top:10px;font-size:1.15rem;opacity:.9}
+.diya{font-size:2.4rem;animation:flick 1.6s infinite alternate;display:inline-block}
+@keyframes flick{from{transform:scale(1);filter:drop-shadow(0 0 6px #ff9933)}to{transform:scale(1.12) rotate(-3deg);filter:drop-shadow(0 0 18px #ffb400)}}
+
+.counter{text-align:center;margin:14px 0 4px;color:var(--gold);font-weight:600}
+
+.grid{display:flex;flex-wrap:wrap;justify-content:center;gap:34px 40px;padding:30px 16px 20px;max-width:1100px;margin:auto}
+.cracker{background:none;border:0;cursor:pointer;width:160px;text-align:center;color:var(--cream);font:inherit;position:relative;transition:transform .2s}
+.cracker:hover,.cracker:focus-visible{transform:translateY(-8px) rotate(-2deg);outline:none}
+.cracker:focus-visible svg{filter:drop-shadow(0 0 10px var(--gold))}
+.cracker svg{width:100%;height:auto;display:block}
+.cracker span{display:block;margin-top:8px;font-weight:600;font-size:1.02rem}
+.cracker.burst svg{animation:boom .45s}
+@keyframes boom{0%{transform:scale(1)}45%{transform:scale(1.2);filter:brightness(1.9)}100%{transform:scale(1)}}
+.cracker.done svg{filter:grayscale(.55) brightness(.8)}
+.cracker.done span::after{content:" ✓";color:var(--gold)}
+.spark{position:fixed;width:8px;height:8px;border-radius:50%;pointer-events:none;z-index:50;animation:fly .9s ease-out forwards}
+@keyframes fly{to{transform:translate(var(--x),var(--y)) scale(0);opacity:0}}
+
+.cracker svg{filter:drop-shadow(0 0 12px var(--glow,#ffb400))}
+.cracker:hover svg{filter:drop-shadow(0 0 26px var(--glow,#ffb400))}
+.breathe{transform-origin:100px 100px;animation:breathe 3.2s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(.94) rotate(0)}50%{transform:scale(1.04) rotate(4deg)}}
+.tw{animation:tw 1.3s ease-in-out infinite alternate}
+@keyframes tw{from{opacity:.25}to{opacity:1}}
+.cracker span{background:rgba(245,197,66,.14);border:1px solid rgba(245,197,66,.5);border-radius:999px;padding:6px 10px}
+
+/* background layers */
+.sky,.mandala{position:fixed;pointer-events:none;z-index:0}
+.sky{inset:0;overflow:hidden}
+.star{position:absolute;border-radius:50%;background:#fff;animation:tw 2s ease-in-out infinite alternate}
+.ember{position:absolute;bottom:-20px;border-radius:50%;background:radial-gradient(circle,#fff3b0,#ffb400 45%,transparent 70%);animation:rise linear infinite}
+@keyframes rise{0%{transform:translate(0,0);opacity:0}10%{opacity:.9}100%{transform:translate(var(--sway),-110vh);opacity:0}}
+.mandala{left:50%;top:50%;width:min(110vmin,950px);height:auto;opacity:.17;animation:spin 140s linear infinite}
+@keyframes spin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+.lights{position:absolute;left:0;top:30px;width:100%;height:60px;z-index:2;pointer-events:none}
+.bulb{animation:tw 1.2s ease-in-out infinite alternate}
+.torana,header,.counter,.grid,.greet{position:relative;z-index:1}
+
+/* nav, sections */
+.locked{display:none}
+.nav a.lock{opacity:.55;cursor:not-allowed}
+.nav a.lock:hover{background:rgba(74,10,18,.5);color:var(--gold)}
+.gobtn{margin-top:22px;padding:13px 34px;border:0;border-radius:999px;background:linear-gradient(var(--marigold),var(--saffron));color:var(--deep);font:600 1.15rem 'Mukta',sans-serif;cursor:pointer;box-shadow:0 0 24px rgba(255,153,51,.7);animation:glow 1.4s infinite alternate}
+html{scroll-behavior:smooth}
+.nav{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.nav a{color:var(--gold);text-decoration:none;font-weight:600;padding:7px 18px;border:1px solid rgba(245,197,66,.6);border-radius:999px;background:rgba(74,10,18,.5)}
+.nav a:hover,.nav a:focus-visible{background:var(--gold);color:var(--deep);outline:none}
+.sec{position:relative;z-index:1;max-width:1100px;margin:auto;padding:50px 16px 20px}
+.sec h2.title{font-family:'Cinzel Decorative',Georgia,serif;color:var(--gold);text-align:center;font-size:clamp(1.6rem,5vw,2.6rem);text-shadow:0 0 16px rgba(255,153,51,.6)}
+.sec p.sub{text-align:center;margin:10px auto 26px;max-width:620px;opacity:.92;font-size:1.1rem}
+.trad-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:20px}
+.trad{background:rgba(58,7,13,.78);border:1px solid rgba(245,197,66,.55);border-radius:16px 16px 40px 16px;padding:22px 20px;backdrop-filter:blur(4px);transition:transform .25s,box-shadow .25s}
+.trad:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(255,153,51,.35)}
+.trad .ic{font-size:2.3rem;width:62px;height:62px;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle,rgba(255,180,0,.35),transparent 70%);margin-bottom:8px}
+.trad h3{color:var(--gold);font-size:1.25rem;margin-bottom:6px}
+.trad p{line-height:1.6;font-size:1rem}
+/* game */
+.game-wrap{position:relative;max-width:720px;margin:auto;border:3px solid var(--gold);border-radius:18px;overflow:hidden;background:#12051d;box-shadow:0 0 36px rgba(255,153,51,.4)}
+.hud{display:flex;justify-content:space-between;gap:10px;padding:10px 16px;background:rgba(74,10,18,.95);font-weight:600;font-size:1.05rem}
+#gc{display:block;width:100%;touch-action:none;cursor:none}
+.gover{position:absolute;inset:44px 0 0 0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;background:rgba(18,5,29,.82);padding:16px}
+.gover.hide{display:none}
+.gover h3{font-family:'Cinzel Decorative',Georgia,serif;color:var(--gold);font-size:1.7rem}
+.gover p{max-width:420px;line-height:1.55}
+.gover button{padding:11px 30px;border:0;border-radius:999px;background:linear-gradient(var(--marigold),var(--saffron));color:var(--deep);font:600 1.05rem 'Mukta',sans-serif;cursor:pointer}
+
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(20,2,4,.82);display:none;align-items:center;justify-content:center;padding:18px;z-index:40}
+.overlay.show{display:flex}
+.card{max-width:560px;width:100%;background:linear-gradient(160deg,#6b0f1a,#3a070d);border:3px solid var(--gold);border-radius:18px;
+  padding:28px 26px;box-shadow:0 0 40px rgba(255,153,51,.5);animation:pop .35s ease-out;max-height:90vh;overflow:auto}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+.card h2{font-family:'Cinzel Decorative',Georgia,serif;color:var(--gold);font-size:1.6rem;margin-bottom:12px}
+.card p{line-height:1.7;font-size:1.08rem;margin-bottom:12px}
+.card button{margin-top:6px;padding:10px 26px;border:0;border-radius:999px;background:linear-gradient(var(--marigold),var(--saffron));
+  color:var(--deep);font:600 1rem 'Mukta',sans-serif;cursor:pointer}
+
+/* greeting */
+.greet{text-align:center;padding:30px 16px 70px;display:none}
+.greet.show{display:block}
+.greet h2{font-family:'Cinzel Decorative',Georgia,serif;font-size:clamp(2.4rem,9vw,5.5rem);color:var(--gold);
+  text-shadow:0 0 25px var(--saffron),0 0 60px var(--crimson);animation:glow 1.4s infinite alternate}
+@keyframes glow{from{transform:scale(1)}to{transform:scale(1.05);text-shadow:0 0 40px var(--marigold),0 0 80px var(--crimson)}}
+.greet p{margin-top:12px;font-size:1.2rem}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="sky" id="sky"></div>
+<div class="torana"></div>
+<div class="lights" id="lights"></div>
+<header>
+  <div class="diya">🪔</div>
+  <h1>Diwali</h1>
+  <p>The Festival of Lights. Tap each firework to light it and read its story.</p>
+</header>
+<nav class="nav"><a href="#grid">Stories</a><a href="#traditions" id="navTrad" class="lock" title="Light all 5 fireworks first">🔒 Traditions</a><a href="#game" id="navGame" class="lock" title="Light all 5 fireworks first">🔒 Catch the Crackers</a></nav>
+<div class="counter" id="counter">0 / 5 lit</div>
+
+<main class="grid" id="grid"></main>
+
+<section class="greet" id="greet">
+  <h2>HAPPY DIWALI!</h2>
+  <p>🪔 May the light of the diyas fill your home with joy, health and prosperity. 🪔</p>
+  <button class="gobtn" id="goTrad">See how Diwali is celebrated and play the game</button>
+</section>
+
+<section class="sec locked" id="traditions">
+  <h2 class="title">How Diwali Is Celebrated</h2>
+  <p class="sub">From the first light of dawn to the last diya at night, these are the traditions families follow.</p>
+  <div class="trad-grid">
+    <article class="trad"><div class="ic">🪔</div><h3>Lighting Deepams</h3><p>Clay lamps filled with oil or ghee and a cotton wick are lit at doorsteps, windows and courtyards at dusk. The light drives away darkness and invites Goddess Lakshmi in.</p></article>
+    <article class="trad"><div class="ic">👗</div><h3>Wearing New Clothes</h3><p>Families buy new sarees, kurtas, dhotis and children's outfits weeks in advance. The clothes are placed before the deity, then worn on Diwali morning as a sign of a fresh start.</p></article>
+    <article class="trad"><div class="ic">🛁</div><h3>Early Oil Bath</h3><p>Before sunrise, elders apply sesame oil and everyone bathes, known as Ganga Snanam in the South. In Tamil homes, people greet each other that morning by asking whether the Ganga bath is done.</p></article>
+    <article class="trad"><div class="ic">🌸</div><h3>Rangoli and Kolam</h3><p>Colourful powders, flower petals or rice-flour patterns are drawn at the entrance. They welcome guests and bring good fortune into the house.</p></article>
+    <article class="trad"><div class="ic">🪷</div><h3>Lakshmi Puja</h3><p>In the evening, the cleaned and decorated home hosts a puja to Lakshmi and Ganesha with flowers, sweets, coins and fruits. Many shopkeepers also worship their new account books.</p></article>
+    <article class="trad"><div class="ic">🍬</div><h3>Sweets and Savouries</h3><p>Ladoo, jalebi, adhirasam, murukku and mysore pak are made at home and shared. In South India, families also take Deepavali lehiyam, a herbal mix, to help digest the feast.</p></article>
+    <article class="trad"><div class="ic">🎆</div><h3>Crackers and Fireworks</h3><p>Children and elders light sparklers and crackers at dawn and after dusk. Choose low-noise green crackers, keep a safe distance and keep a bucket of water nearby.</p></article>
+    <article class="trad"><div class="ic">🤝</div><h3>Family, Friends and Gifts</h3><p>People visit relatives, exchange sweets and gifts, call faraway loved ones and share wishes. Diwali is as much about togetherness as it is about light.</p></article>
+  </div>
+</section>
+
+<section class="sec locked" id="game">
+  <h2 class="title">Catch the Crackers!</h2>
+  <p class="sub">Move your gold thali to catch falling crackers and diyas. Avoid the dark orbs, because darkness costs you a life.</p>
+  <div class="game-wrap">
+    <div class="hud"><span>Score: <b id="gScore">0</b></span><span id="gLives">🪔🪔🪔</span><span>Best: <b id="gBest">0</b></span></div>
+    <canvas id="gc" aria-label="Cracker catching game"></canvas>
+    <div class="gover" id="gOver">
+      <h3 id="gTitle">Catch the Crackers</h3>
+      <p id="gMsg">Move your mouse or finger, or use the left and right arrow keys, to slide the thali. 🎆 🧨 = 1 point, 🪔 = 3 points, 🌑 = lose a life.</p>
+      <button id="gBtn">Start game</button>
+    </div>
+  </div>
+</section>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true">
+  <div class="card">
+    <h2 id="mTitle"></h2>
+    <p id="mText"></p>
+    <button id="mClose">Close</button>
+  </div>
+</div>
+<div class="torana"></div>
+
+<script>
+const stories = [
+  {t:"What is Diwali?", c:"#c1121f",
+   x:"Diwali, or Deepavali, comes from the Sanskrit words 'deepa' (lamp) and 'avali' (row), meaning a row of lights. It is one of the oldest festivals of India, mentioned in ancient texts such as the Padma Purana and Skanda Purana. It is celebrated on the new moon day of the month of Kartika (October or November) and symbolises the victory of light over darkness and good over evil."},
+  {t:"Return of Lord Rama", c:"#d9480f",
+   x:"According to the Ramayana, Lord Rama returned to Ayodhya after 14 years of exile and his victory over the demon king Ravana. The people of Ayodhya welcomed him by lighting thousands of earthen lamps on the dark new moon night. This tradition of lighting diyas continues every Diwali."},
+  {t:"Goddess Lakshmi", c:"#b5179e",
+   x:"Diwali is also linked to Goddess Lakshmi, the goddess of wealth and prosperity, who is said to have risen from the ocean during the Samudra Manthan (churning of the ocean). Families clean and decorate their homes and perform Lakshmi Puja in the evening. Traders and merchants traditionally open new account books on this day."},
+  {t:"Krishna and Narakasura", c:"#e67700",
+   x:"In many parts of India, especially the South, Diwali is celebrated as Naraka Chaturdashi, the day Lord Krishna (with Satyabhama) defeated the tyrant Narakasura and freed thousands of captives. People wake before sunrise, take an oil bath, wear new clothes and burst crackers to celebrate the victory of good over evil."},
+  {t:"Many faiths, one light", c:"#2b9348",
+   x:"Diwali is shared by many traditions. Jains mark the nirvana of Lord Mahavira in 527 BCE. Sikhs celebrate Bandi Chhor Divas, the release of Guru Hargobind Ji from Gwalior Fort in 1619. Some Buddhist communities, such as the Newar Buddhists of Nepal, also observe it. Today it is celebrated around the world, from Singapore to the UK."}
+];
+
+const grid = document.getElementById('grid');
+const overlay = document.getElementById('overlay');
+let opened = new Set();
+
+function rng(seed){return()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646}}
+const palettes=[
+  {a:'#fff7d1',b:'#ffc21a',c:'#e65100',g:'#ffb400'},  // gold
+  {a:'#ffe3f4',b:'#ff3fa4',c:'#7b1fa2',g:'#ff3fa4'},  // pink
+  {a:'#e8ffec',b:'#2ee66b',c:'#00796b',g:'#2ee66b'},  // emerald
+  {a:'#fff0d6',b:'#ff7a1a',c:'#b71c1c',g:'#ff7a1a'},  // saffron red
+  {a:'#e6eeff',b:'#5b8cff',c:'#5e35b1',g:'#6f9bff'}   // royal blue
+];
+function crackerSVG(i){
+  const P=palettes[i%palettes.length], R=rng(i*977+13);
+  let rays='', inner='', dots='', ring='', stars='';
+  const ray=(n,minL,maxL,rot,out)=>{
+    for(let k=0;k<n;k++){
+      const a=(k/n)*Math.PI*2+rot+(R()-.5)*.08, len=minL+R()*(maxL-minL), r0=7+R()*9, w=.9+R()*1.1;
+      const c=Math.cos(a), s=Math.sin(a), px=-s*w, py=c*w;
+      const x1=100+c*r0, y1=100+s*r0, x2=100+c*len, y2=100+s*len+len*.06;
+      out.push(`<polygon points="${(x1+px).toFixed(1)},${(y1+py).toFixed(1)} ${x2.toFixed(1)},${y2.toFixed(1)} ${(x1-px).toFixed(1)},${(y1-py).toFixed(1)}" fill="url(#ray${i})"/>`);
+      if(R()>.45) out.push(`<circle cx="${x2.toFixed(1)}" cy="${(y2+3).toFixed(1)}" r="1.5" fill="${P.a}" class="tw" style="animation-delay:${(R()*2).toFixed(2)}s"/>`);
+    }
+  };
+  const A=[],B=[]; ray(60,52,90,0,A); ray(30,26,46,.1,B);
+  rays=A.join(''); inner=B.join('');
+  for(let k=0;k<22;k++){
+    const a=R()*Math.PI*2, d=14+R()*58, r=.9+R()*1.5, x=100+Math.cos(a)*d, y=100+Math.sin(a)*d;
+    dots+=`<g class="tw" style="animation-delay:${(R()*2).toFixed(2)}s"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(r+2.2).toFixed(1)}" fill="${P.b}" opacity=".4"/><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="#fff"/></g>`;
+  }
+  for(let k=0;k<16;k++){
+    const a=(k/16)*Math.PI*2+.2;
+    ring+=`<circle cx="${(100+Math.cos(a)*34).toFixed(1)}" cy="${(100+Math.sin(a)*34).toFixed(1)}" r="1.8" fill="${P.a}"/>`;
+  }
+  for(let k=0;k<22;k++){
+    stars+=`<circle cx="${(R()*190+5).toFixed(0)}" cy="${(R()*190+5).toFixed(0)}" r="${(R()*.8+.3).toFixed(1)}" fill="#fff" opacity="${(R()*.6+.2).toFixed(2)}"/>`;
+  }
+  return `<svg viewBox="0 0 200 200" aria-hidden="true">
+    <defs>
+      <radialGradient id="bg${i}" cx="50%" cy="50%" r="75%"><stop offset="0" stop-color="#2a0f3a"/><stop offset=".6" stop-color="#12061c"/><stop offset="1" stop-color="#060209"/></radialGradient>
+      <radialGradient id="ray${i}" gradientUnits="userSpaceOnUse" cx="100" cy="100" r="95">
+        <stop offset="0" stop-color="${P.a}"/><stop offset=".4" stop-color="${P.b}"/><stop offset="1" stop-color="${P.c}" stop-opacity=".2"/>
+      </radialGradient>
+      <radialGradient id="core${i}"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="${P.b}" stop-opacity=".7"/><stop offset="1" stop-color="${P.b}" stop-opacity="0"/></radialGradient>
+      <filter id="blur${i}" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4"/></filter>
+      <clipPath id="clip${i}"><rect x="2" y="2" width="196" height="196" rx="22"/></clipPath>
+    </defs>
+    <g clip-path="url(#clip${i})">
+      <rect width="200" height="200" fill="url(#bg${i})"/>
+      ${stars}
+      <g class="breathe">
+        <g filter="url(#blur${i})" opacity=".75">${rays}</g>
+        ${rays}${inner}${ring}${dots}
+        <circle cx="100" cy="100" r="22" fill="url(#core${i})"/>
+      </g>
+    </g>
+    <rect x="2" y="2" width="196" height="196" rx="22" fill="none" stroke="#f5c542" stroke-width="3"/>
+    <rect x="8" y="8" width="184" height="184" rx="17" fill="none" stroke="${P.b}" stroke-opacity=".5" stroke-width="1" stroke-dasharray="2 5"/>
+  </svg>`;
+}
+
+stories.forEach((s,i)=>{
+  const b = document.createElement('button');
+  b.className = 'cracker';
+  b.setAttribute('aria-label','Light firework: '+s.t);
+  b.style.setProperty('--glow',palettes[i%palettes.length].g);
+  b.innerHTML = crackerSVG(i) + '<span>'+s.t+'</span>';
+  b.addEventListener('click',()=>light(b,i));
+  grid.appendChild(b);
+});
+
+function sparks(x,y){
+  const cols=['#ffb400','#ff9933','#f5c542','#c1121f','#fff3d6'];
+  for(let i=0;i<26;i++){
+    const d=document.createElement('div'); d.className='spark';
+    const a=Math.random()*Math.PI*2, r=60+Math.random()*90;
+    d.style.left=x+'px'; d.style.top=y+'px';
+    d.style.background=cols[i%cols.length];
+    d.style.setProperty('--x',Math.cos(a)*r+'px');
+    d.style.setProperty('--y',Math.sin(a)*r+'px');
+    document.body.appendChild(d); setTimeout(()=>d.remove(),950);
+  }
+}
+
+function light(btn,i){
+  const r = btn.getBoundingClientRect();
+  btn.classList.add('burst');
+  setTimeout(()=>{
+    sparks(r.left+r.width/2, r.top+r.height/2);
+    btn.classList.remove('burst'); btn.classList.add('done');
+    document.getElementById('mTitle').textContent = stories[i].t;
+    document.getElementById('mText').textContent = stories[i].x;
+    overlay.classList.add('show');
+    opened.add(i);
+    document.getElementById('counter').textContent = opened.size+' / 5 lit';
+  },450);
+}
+
+function closeModal(){
+  overlay.classList.remove('show');
+  if(opened.size===5){
+    const g=document.getElementById('greet');
+    if(!g.classList.contains('show')){
+      g.classList.add('show');
+      g.scrollIntoView({behavior:'smooth',block:'center'});
+      const nt=document.getElementById('navTrad'); nt.classList.remove('lock'); nt.textContent='Traditions'; nt.title='';
+      const ng=document.getElementById('navGame'); ng.classList.remove('lock'); ng.textContent='Catch the Crackers'; ng.title='';
+      document.getElementById('counter').textContent='All 5 lit! Traditions and the game are unlocked';
+      for(let k=0;k<6;k++) setTimeout(()=>sparks(innerWidth*(.15+Math.random()*.7), innerHeight*(.2+Math.random()*.5)),k*350);
+    }
+  }
+}
+document.getElementById('mClose').addEventListener('click',closeModal);
+function showTrad(target){
+  document.getElementById('traditions').classList.remove('locked');
+  document.getElementById('game').classList.remove('locked');
+  dispatchEvent(new Event('resize'));
+  document.getElementById(target||'traditions').scrollIntoView({behavior:'smooth'});
+}
+document.getElementById('goTrad').addEventListener('click',()=>showTrad('traditions'));
+[['navTrad','traditions'],['navGame','game']].forEach(([id,target])=>{
+  document.getElementById(id).addEventListener('click',e=>{
+    e.preventDefault();
+    if(opened.size===5) showTrad(target);
+    else{const c=document.getElementById('counter'); c.textContent='Light all 5 fireworks to unlock Traditions and the game ('+opened.size+' / 5)';}
+  });
+});
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('show'))closeModal()});
+
+
+/* ---------- cracker catching game ---------- */
+(function(){
+  const cv=document.getElementById('gc'), ctx=cv.getContext('2d');
+  const $=id=>document.getElementById(id);
+  let W=700,H=430,px=350,running=false,score=0,lives=3,items=[],parts=[],spawn=0,last=0,flash=0,keys={};
+  let best=0; try{best=+localStorage.getItem('diwaliBest')||0}catch(e){} $('gBest').textContent=best;
+  const good=['🎆','🎇','🧨','🎉','✨'];
+  function fit(){
+    W=Math.min(720,cv.parentElement.clientWidth); H=Math.round(W*.6);
+    const d=window.devicePixelRatio||1; cv.width=W*d; cv.height=H*d; cv.style.height=H+'px';
+    ctx.setTransform(d,0,0,d,0,0); px=Math.min(Math.max(px,40),W-40);
+  }
+  fit(); addEventListener('resize',fit);
+  const pw=()=>Math.max(84,W*.17), py=()=>H-34;
+  function move(e){const r=cv.getBoundingClientRect(); px=(e.clientX-r.left)*W/r.width;}
+  cv.addEventListener('pointermove',move); cv.addEventListener('pointerdown',move);
+  addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){keys[e.key]=true; if(running)e.preventDefault();}});
+  addEventListener('keyup',e=>{keys[e.key]=false});
+  function burst(x,y,c){for(let i=0;i<14;i++){const a=Math.random()*6.28,v=60+Math.random()*140;parts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-40,l:1,c})}}
+  function hud(){$('gScore').textContent=score;$('gLives').textContent='🪔'.repeat(Math.max(lives,0))||'💨'}
+  function start(){score=0;lives=3;items=[];parts=[];spawn=0;running=true;hud();$('gOver').classList.add('hide')}
+  function end(){
+    running=false; if(score>best){best=score;$('gBest').textContent=best;try{localStorage.setItem('diwaliBest',best)}catch(e){}}
+    $('gTitle').textContent='Game over!'; $('gMsg').textContent='You caught '+score+' points of Diwali joy. Happy Diwali! Try again to beat your best.';
+    $('gBtn').textContent='Play again'; $('gOver').classList.remove('hide');
+  }
+  $('gBtn').addEventListener('click',start);
+  function frame(t){
+    const dt=Math.min((t-last)/1000||0,.05); last=t;
+    if(running){
+      if(keys.ArrowLeft)px-=520*dt; if(keys.ArrowRight)px+=520*dt;
+      px=Math.min(Math.max(px,pw()/2),W-pw()/2);
+      spawn-=dt;
+      if(spawn<=0){
+        spawn=Math.max(.35,.9-score*.012);
+        const r=Math.random(), sp=(120+Math.min(score*3,170)+Math.random()*70)*(H/430);
+        let it={x:30+Math.random()*(W-60),y:-30,sp,s:34};
+        if(r<.12){it.e='🪔';it.v=3;it.s=38}else if(r<.32){it.e='🌑';it.dark=true}else{it.e=good[Math.floor(Math.random()*good.length)];it.v=1}
+        items.push(it);
+      }
+      for(const it of items){
+        it.y+=it.sp*dt;
+        if(!it.done && it.y>py()-14 && it.y<py()+16 && Math.abs(it.x-px)<pw()/2+8){
+          it.done=true;
+          if(it.dark){lives--;flash=.35;burst(it.x,it.y,'#555');hud();if(lives<=0)end();}
+          else{score+=it.v;burst(it.x,it.y,it.v>1?'#ffd700':'#ff9933');hud();}
+        }
+      }
+      items=items.filter(i=>!i.done&&i.y<H+40);
+    }
+    // draw
+    const g=ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,'#14061f'); g.addColorStop(.7,'#3a0a24'); g.addColorStop(1,'#7a2a0a');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    for(const it of items){ctx.font=it.s+'px serif'; ctx.fillText(it.e,it.x,it.y)}
+    for(const p of parts){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=260*dt;p.l-=dt*1.6;}
+    parts=parts.filter(p=>p.l>0);
+    for(const p of parts){ctx.globalAlpha=Math.max(p.l,0);ctx.fillStyle=p.c;ctx.beginPath();ctx.arc(p.x,p.y,3,0,6.28);ctx.fill()}
+    ctx.globalAlpha=1;
+    // thali (gold plate)
+    const w=pw(), y=py();
+    ctx.fillStyle='rgba(255,180,0,.25)'; ctx.beginPath(); ctx.ellipse(px,y+10,w/2+10,18,0,0,6.28); ctx.fill();
+    const pg=ctx.createLinearGradient(0,y-8,0,y+22); pg.addColorStop(0,'#ffe27a'); pg.addColorStop(1,'#b8860b');
+    ctx.fillStyle=pg; ctx.beginPath(); ctx.ellipse(px,y+8,w/2,13,0,0,6.28); ctx.fill();
+    ctx.fillStyle='#d49a12'; ctx.beginPath(); ctx.ellipse(px,y+6,w/2-9,8,0,0,6.28); ctx.fill();
+    ctx.strokeStyle='#fff3b0'; ctx.lineWidth=2; ctx.beginPath(); ctx.ellipse(px,y+8,w/2,13,0,0,6.28); ctx.stroke();
+    if(flash>0){flash-=dt;ctx.fillStyle='rgba(255,0,0,'+flash+')';ctx.fillRect(0,0,W,H)}
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+/* ---------- background ---------- */
+(function(){
+  const sky=document.getElementById('sky'), rnd=(a,b)=>a+Math.random()*(b-a);
+  for(let i=0;i<70;i++){
+    const d=document.createElement('div'); d.className='star'; const z=rnd(1,2.6);
+    d.style.cssText=`left:${rnd(0,100)}%;top:${rnd(0,70)}%;width:${z}px;height:${z}px;animation-delay:${rnd(0,3)}s`;
+    sky.appendChild(d);
+  }
+  const cols=['#fff3b0','#ffb400','#ff8a3d'];
+  for(let i=0;i<34;i++){
+    const d=document.createElement('div'); d.className='ember'; const z=rnd(3,10);
+    d.style.cssText=`left:${rnd(0,100)}%;width:${z}px;height:${z}px;--sway:${rnd(-70,70)}px;animation-duration:${rnd(9,20)}s;animation-delay:-${rnd(0,20)}s`;
+    sky.appendChild(d);
+  }
+  // rotating gold mandala (rangoli)
+  let g='';
+  [290,250,200,150,100,50].forEach(r=>g+=`<circle cx="300" cy="300" r="${r}"/>`);
+  for(let k=0;k<16;k++) g+=`<ellipse cx="300" cy="170" rx="22" ry="62" transform="rotate(${k*22.5} 300 300)"/>`;
+  for(let k=0;k<32;k++) g+=`<path d="M300 20Q312 48 300 70Q288 48 300 20Z" transform="rotate(${k*11.25} 300 300)"/>`;
+  for(let k=0;k<48;k++) g+=`<circle cx="300" cy="38" r="2.5" transform="rotate(${k*7.5} 300 300)" fill="#f5c542"/>`;
+  const m=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  m.setAttribute('viewBox','0 0 600 600'); m.setAttribute('class','mandala');
+  m.setAttribute('fill','none'); m.setAttribute('stroke','#f5c542'); m.setAttribute('stroke-width','1.3');
+  m.innerHTML=g; document.body.appendChild(m);
+  // hanging string lights
+  function lights(){
+    const w=innerWidth, box=document.getElementById('lights'), colors=['#ffb400','#ff5e8a','#ff8a3d','#ffe066','#7dffb2'];
+    let path='M0 8', bulbs='';
+    for(let x=0;x<=w;x+=8) path+=` L${x} ${(8+12*Math.abs(Math.sin(x/w*Math.PI*6))).toFixed(1)}`;
+    for(let x=24,i=0;x<w;x+=48,i++){
+      const y=8+12*Math.abs(Math.sin(x/w*Math.PI*6)), c=colors[i%colors.length];
+      bulbs+=`<g class="bulb" style="animation-delay:${(i%5)*.25}s"><circle cx="${x}" cy="${y+8}" r="9" fill="${c}" opacity=".3"/><circle cx="${x}" cy="${y+8}" r="4.5" fill="${c}"/></g>`;
+    }
+    box.innerHTML=`<svg width="${w}" height="60" viewBox="0 0 ${w} 60"><path d="${path}" stroke="#7a5230" stroke-width="1.5" fill="none"/>${bulbs}</svg>`;
+  }
+  lights(); addEventListener('resize',lights);
+})();
+</script>
+</body>
+</html>
